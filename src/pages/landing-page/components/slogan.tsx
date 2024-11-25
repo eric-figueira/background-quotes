@@ -22,7 +22,7 @@ export function Slogan() {
   }, [])
 
   return (
-    <div className="flex flex-col items-center font-extrabold text-[52px] leading-[4rem]">
+    <div className="flex flex-col items-center px-4 text-center font-extrabold text-3xl sm:text-4xl lg:text-5xl lg:leading-[3.5rem] xl:text-[52px] xl:leading-[4rem]">
       <span>Create the background that</span>
       <div className="flex gap-3">
         <div>

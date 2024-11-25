@@ -9,9 +9,9 @@ export function LandingPage() {
       <div className="max-w-4xl flex flex-col gap-10 items-center">
         <Slogan />
 
-        <div className="max-w-lg flex flex-col items-center gap-8">
-          <p className="text-slate-600 font-medium text-xl text-center">Select the colors, the author, the device, and everything else that you possibly need.</p>
-          <div className="w-full px-12">
+        <div className="max-w-md md:max-w-lg flex flex-col items-center gap-8 px-6">
+          <p className="text-slate-600 font-medium sm:text-lg lg:text-xl text-center max-w-lg">Select the colors, the author, the device, and everything else that you possibly need.</p>
+          <div className="w-full px-6 sm:px-12">
             <Button>
               Start creating
             </Button>
