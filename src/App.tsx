@@ -1,5 +1,24 @@
+import {
+  createBrowserRouter,
+  RouterProvider
+} from 'react-router-dom'
+import { LandingPage } from './pages/landing-page'
+import { CreatePage } from './pages/create-page'
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <LandingPage />
+  },
+  {
+    path: '/create',
+    element: <CreatePage />
+  }
+])
+
+
 export function App() {
   return (
-    <div className="bg-red-700">Hello World!</div>
+    <RouterProvider router={router} />
   )
 }
