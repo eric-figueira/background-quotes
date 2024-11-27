@@ -2,8 +2,10 @@ import { ArrowRight, Loader2 } from "lucide-react";
 import { Button } from "../../components/button";
 import { Slogan } from "./components/slogan";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function LandingPage() {
+  const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
 
   function handleClick() {
@@ -11,7 +13,9 @@ export function LandingPage() {
 
     setTimeout(() => {
       setIsLoading(false)
-    }, 5000)
+      
+      navigate('/create')
+    }, 3000)
   }
 
   return (
