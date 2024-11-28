@@ -17,4 +17,4 @@ const Button = React.forwardRef<HTMLButtonElement, React.ComponentProps<'button'
   }
 )
 
-export {Button}
+export { Button }

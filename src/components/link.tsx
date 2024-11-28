@@ -21,4 +21,4 @@ const Link = React.forwardRef<HTMLAnchorElement, React.ComponentProps<'a'>>(
   }
 )
 
-export {Link}
+export { Link }

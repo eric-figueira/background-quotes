@@ -9,7 +9,7 @@ export function Header({ className, ...props }: React.ComponentProps<'div'>) {
         className
       )}
     >
-      <span className="font-semibold text-gray-900 text-2xl">Create</span>
+      <h1 className="font-semibold text-gray-900 text-2xl">Create</h1>
       <span className="font-semibold">PT-BR</span>
     </header>
   )
