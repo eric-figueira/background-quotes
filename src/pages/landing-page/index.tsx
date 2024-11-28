@@ -32,6 +32,7 @@ export function LandingPage() {
             <Button 
               onClick={handleClick}
               disabled={isLoading}
+              className="w-full"
             >
               <div className="flex justify-center items-center gap-2">
                 {isLoading ? (
