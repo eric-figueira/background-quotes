@@ -4,8 +4,22 @@ import { Input } from "../../components/input";
 import { Switch } from "../../components/switch";
 import { Button } from "../../components/button";
 
+import { 
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+  SelectGroup,
+  SelectLabel
+} from "../../components/select";
+import { devices } from "../../data/devices";
+import { useState } from "react";
+
 
 export function CreatePage() {
+  const [device, setDevice] = useState('desktop')
+
   return (
     <main className="h-screen flex flex-col">
       <Header />
@@ -100,7 +114,26 @@ export function CreatePage() {
                   <span className="font-normal text-slate-400 text-sm">(optional)</span>
                 </div>
 
-                <Input type="text" placeholder="e.g. Sun Tzu" />
+                <Select value={device} onValueChange={(value) => setDevice(value)}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Devices</SelectLabel>
+                      {devices.map((item) => {
+                        return (
+                          <SelectItem value={item.slug} className="w-full">
+                            <div className="w-full inline-flex justify-between items-center">
+                              <span>{item.name}</span>
+                              <span className="text-xs text-slate-600">{item.width} x {item.height}</span>
+                            </div>
+                          </SelectItem>
+                        )
+                      })}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
 
                 {/* <span className="font-regular text-sm text-slate-500">Select the device's size</span> */}
               </div>
