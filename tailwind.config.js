@@ -12,9 +12,34 @@ export default {
       fontFamily: {
         sans: ["Inter", "sans-serif"],
       },
+      keyframes: {
+        'accordion-down': {
+          from: { height: 0 },
+          to: { height: 'var(--radix-accordion-content-height)' }
+        },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: 0 }
+        },
+        enter: {
+          from: { opacity: 0 },
+          to: { opacity: 1 }
+        },
+        leave: {
+          from: { transform: 'scale(1)', opacity: 1 },
+          to: { transform: 'scale(0.9)', opacity: 0 }
+        }
+      },
+      animation: {
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
+        enter: 'enter 0.2s ease-out',
+        leave: 'leave 0.15s ease-in forwards'
+      }
     },
   },
   plugins: [
+    require("tailwindcss-animate"),
     function ({ matchUtilities, theme }) {
       matchUtilities(
         {

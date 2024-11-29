@@ -1,5 +1,6 @@
 import React from "react";
-import { cn } from "../../../utils/cn";
+import { cn } from "../../../../utils/cn";
+import { LanguageSelect } from "./language-select";
 
 export function Header({ className, ...props }: React.ComponentProps<'div'>) {
   return (
@@ -10,7 +11,8 @@ export function Header({ className, ...props }: React.ComponentProps<'div'>) {
       )}
     >
       <h1 className="font-semibold text-gray-900 text-2xl">Create</h1>
-      <span className="font-semibold">PT-BR</span>
+      
+      <LanguageSelect />
     </header>
   )
 }
