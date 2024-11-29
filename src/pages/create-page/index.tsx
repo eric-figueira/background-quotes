@@ -4,6 +4,7 @@ import { Input } from "../../components/input";
 import { Switch } from "../../components/switch";
 import { Button } from "../../components/button";
 
+
 export function CreatePage() {
   return (
     <main className="h-screen flex flex-col">
@@ -50,25 +51,33 @@ export function CreatePage() {
             <div className="flex flex-col gap-4">  
               <div className="w-full flex flex-col gap-[6px]">
                 <div className="flex items-center gap-2">
-                  <span className="font-medium text-sm flex-1">Color</span>
-                  <Input type="color" className="flex-shrink" />
-                </div>
-
-                <div className="flex justify-between">
-                  <span className="font-regular text-sm text-slate-500">Select background's color</span>
-                  <span className="font-normal text-slate-400 text-sm">(optional)</span>
+                  <div className="w-1/2 flex flex-col gap-1">
+                    <label className="font-medium text-sm flex-1" htmlFor="backgroundColorPicker">Background Color</label>
+                    <span className="font-normal text-slate-400 text-sm">(optional)</span>
+                  </div>
+                  <div className="w-1/2">
+                    <Input 
+                      type="color"
+                      className="w-full h-10 p-0 rounded-md border-none inset-0 appearance-none bg-transparent"
+                      id="backgroundColorPicker"
+                    />
+                  </div>
                 </div>
               </div>
 
               <div className="w-full flex flex-col gap-[6px]">
                 <div className="flex items-center gap-2">
-                  <span className="font-medium text-sm flex-1">Color</span>
-                  <Input type="color" className="flex-shrink" />
-                </div>
-
-                <div className="flex justify-between">
-                  <span className="font-regular text-sm text-slate-500">Select text foreground color</span>
-                  <span className="font-normal text-slate-400 text-sm">(optional)</span>
+                  <div className="w-1/2 flex flex-col gap-1">
+                    <label className="font-medium text-sm flex-1" htmlFor="foregroundColorPicker">Foreground Color</label>
+                    <span className="font-normal text-slate-400 text-sm">(optional)</span>
+                  </div>
+                  <div className="w-1/2">
+                    <Input 
+                      type="color"
+                      className="w-full h-10 p-0 rounded-md border-none inset-0 appearance-none bg-transparent"
+                      id="foregroundColorPicker"
+                    />
+                  </div>
                 </div>
               </div>
 
