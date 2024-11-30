@@ -6,7 +6,7 @@ export function Header({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <header {...props}
       className={cn(
-        "flex justify-between items-center gap-2 py-6 md:py-8 px-8 md:px-10 border-b border-slate-500", 
+        "flex justify-between items-center gap-2 py-5 md:py-7 px-8 md:px-10 border-b border-slate-500", 
         className
       )}
     >

@@ -96,7 +96,7 @@ export function CreatePage() {
                   </div>
                 </div>
 
-                <div className="inline-flex justify-between items-center">
+                <div className="inline-flex justify-between gap-2 items-center">
                   <span className="font-medium text-sm">Show author's name on quote</span>
                   <Switch defaultChecked />
                 </div>
@@ -134,8 +134,6 @@ export function CreatePage() {
                     </SelectGroup>
                   </SelectContent>
                 </Select>
-
-                {/* <span className="font-regular text-sm text-slate-500">Select the device's size</span> */}
               </div>
 
               <Button className="w-full">
