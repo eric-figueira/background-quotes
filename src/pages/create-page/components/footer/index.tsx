@@ -9,7 +9,7 @@ export function Footer({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <footer {...props}
       className={cn(
-        "text-[16px] flex items-center gap-2 py-8 px-10 border-t border-slate-500", 
+        "text-[16px] flex items-center gap-2 py-5 md:py-7 px-8 md:px-10 border-t border-slate-500", 
         className
       )}
     >

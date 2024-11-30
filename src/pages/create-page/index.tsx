@@ -23,8 +23,8 @@ export function CreatePage() {
   return (
     <main className="h-screen flex flex-col">
       <Header />
-      <div className="flex-grow p-10">
-        <div className="w-1/3 space-y-4">
+      <div className="flex-grow p-8 md:p-10">
+        <div className="w-full sm:w-1/2 md:w-1/3 space-y-4">
           <div className="rounded-md border border-slate-300 space-y-6 p-6">
             <div className="space-y-4">
               <h2 className="font-semibold text-2xl">Quote</h2>
