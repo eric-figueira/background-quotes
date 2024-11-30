@@ -1,145 +1,74 @@
 import { Footer } from "./components/footer";
 import { Header } from "./components/header";
-import { Input } from "../../components/input";
-import { Switch } from "../../components/switch";
-import { Button } from "../../components/button";
 
-import { 
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-  SelectGroup,
-  SelectLabel
-} from "../../components/select";
-import { devices } from "../../data/devices";
 import { useState } from "react";
+import { CreateImageForm, CreateImageSchema } from "./components/create-image-form";
+import { devices } from "../../data/devices";
+import { Link } from "../../components/link";
+import { Button } from "../../components/button";
+import { Download } from "lucide-react";
 
 
 export function CreatePage() {
-  const [device, setDevice] = useState('desktop')
+  const [image, setImage] = useState('')
+
+  async function handleCreateImage(data: CreateImageSchema) {
+    console.log(data)
+
+    const minLength = Number(data.minLength)
+    const maxLength = Number(data.maxLength)
+
+    const device = devices.find(dev => dev.slug === data.device)
+    const width = device!.width
+    const height = device!.height
+
+    const response = await fetch('http://localhost:5000/create', {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "author": data.author,
+        "min_length": minLength,
+        "max_length": maxLength,
+        "background_color": data.backgroundColor,
+        "foreground_color": data.foregroundColor,
+        "show_author": data.showAuthor,
+        "width": width,
+        "height": height
+      })
+    })
+
+    const blob = await response.blob()
+    const url = URL.createObjectURL(blob)
+    setImage(url)
+  }
 
   return (
     <main className="h-screen flex flex-col">
       <Header />
-      <div className="flex-grow p-8 md:p-10">
-        <div className="w-full sm:w-1/2 md:w-1/3 space-y-4">
+      <div className="flex gap-8 flex-grow p-8 md:p-10">
+        <div className="w-full sm:w-1/2 md:w-1/3">
+          <CreateImageForm handleCreateImage={handleCreateImage} />
+        </div>
+        <div className="w-full flex-shrink">
           <div className="rounded-md border border-slate-300 space-y-6 p-6">
-            <div className="space-y-4">
-              <h2 className="font-semibold text-2xl">Quote</h2>
+            <h2 className="font-semibold text-2xl w-fit">Resultado</h2>
+            
+            <div className="flex gap-4">
+              <img src={image} alt="Generated Image" />
 
-              <div className="flex flex-col gap-4">  
-                <div className="w-full flex flex-col gap-[6px]">
-                  <div className="flex justify-between">
-                    <span className="font-medium text-sm">Author</span>
-                    <span className="font-normal text-slate-400 text-sm">(optional)</span>
-                  </div>
-
-                  <div className="flex gap-2">
-                    <Input type="text" placeholder="e.g. Sun Tzu" />
-                    <Button className="bg-slate-100 text-slate-950 hover:bg-slate-200 font-medium">Search</Button>
-                  </div>
-
-                  <span className="font-regular text-sm text-slate-500">Search for any author</span>
-                </div>
-
-                <div className="w-full flex items-center gap-4">
-                  <div className="w-full flex flex-col gap-[6px]">
-                    <span className="font-medium text-sm">Min length</span>
-                    <Input type="number" placeholder="e.g. 20" />
-                  </div>
-
-                  <div className="w-full flex flex-col gap-[6px]">
-                    <span className="font-medium text-sm">Max length</span>
-                    <Input type="number" placeholder="e.g. 80" />
-                  </div>
-                </div>
-              </div>
+              <Link href={image} download="generated.png">
+                <Button className="gap-2">
+                  <>
+                    <span>Download image</span>
+                    <Download className="size-5" />
+                  </>
+                </Button>
+              </Link>
             </div>
-
-            <div className="w-full h-[1px] bg-slate-300" />
-
-            <div className="space-y-4">
-              <h2 className="font-semibold text-2xl">Background</h2>
-
-              <div className="flex flex-col gap-4">  
-                <div className="w-full flex flex-col gap-[6px]">
-                  <div className="flex items-center gap-2">
-                    <div className="w-1/2 flex flex-col gap-1">
-                      <label className="font-medium text-sm flex-1" htmlFor="backgroundColorPicker">Background Color</label>
-                      <span className="font-normal text-slate-400 text-sm">(optional)</span>
-                    </div>
-                    <div className="w-1/2">
-                      <Input 
-                        type="color"
-                        className="w-full h-10 p-0 rounded-md border-none inset-0 appearance-none bg-transparent"
-                        id="backgroundColorPicker"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="w-full flex flex-col gap-[6px]">
-                  <div className="flex items-center gap-2">
-                    <div className="w-1/2 flex flex-col gap-1">
-                      <label className="font-medium text-sm flex-1" htmlFor="foregroundColorPicker">Foreground Color</label>
-                      <span className="font-normal text-slate-400 text-sm">(optional)</span>
-                    </div>
-                    <div className="w-1/2">
-                      <Input 
-                        type="color"
-                        className="w-full h-10 p-0 rounded-md border-none inset-0 appearance-none bg-transparent"
-                        id="foregroundColorPicker"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="inline-flex justify-between gap-2 items-center">
-                  <span className="font-medium text-sm">Show author's name on quote</span>
-                  <Switch defaultChecked />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="rounded-md border border-slate-300 space-y-4 p-6">
-            <h2 className="font-semibold text-2xl">Create image</h2>
-
-            <div className="flex flex-col gap-4">
-              <div className="w-full flex flex-col gap-[6px]">
-                <div className="flex justify-between">
-                  <span className="font-medium text-sm">Device</span>
-                  <span className="font-normal text-slate-400 text-sm">(optional)</span>
-                </div>
-
-                <Select value={device} onValueChange={(value) => setDevice(value)}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel>Devices</SelectLabel>
-                      {devices.map((item) => {
-                        return (
-                          <SelectItem value={item.slug} className="w-full">
-                            <div className="w-full inline-flex justify-between items-center">
-                              <span>{item.name}</span>
-                              <span className="text-xs text-slate-600">{item.width} x {item.height}</span>
-                            </div>
-                          </SelectItem>
-                        )
-                      })}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <Button className="w-full">
-                Create image
-              </Button>
-            </div>
+            
           </div>
         </div>
       </div>

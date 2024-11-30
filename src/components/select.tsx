@@ -4,7 +4,19 @@ import { Check, ChevronDown, ChevronUp } from "lucide-react"
 
 import { cn } from "../utils/cn"
 
-const Select = SelectPrimitive.Root
+
+const Select = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.Trigger>, // Ref será direcionado para o Trigger ou outro subcomponente
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Root> // Usamos a tipagem do SelectPrimitive.Root
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+>(({ children, ...props }, ref) => (
+  <SelectPrimitive.Root {...props}>
+    {children}
+  </SelectPrimitive.Root>
+));
+
+
+Select.displayName = SelectPrimitive.Root.displayName
 
 const SelectGroup = SelectPrimitive.Group
 
