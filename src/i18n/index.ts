@@ -6,7 +6,7 @@ i18n
   .use(initReactI18next)
   .init({
     resources: translations,
-    fallbackLng: 'en-US',
+    fallbackLng: 'en',
     defaultNS: 'translations',
   })
 

@@ -1,6 +1,9 @@
 const ptTranslations = {
   translations: {
-    indexStartCreatingButton: "Começe a criar"
+    indexStartCreatingButton: "Começe a criar",
+    createHeaderText: "Criar",
+    createQuote: "Frase",
+    createBackground: "Plano de fundo",
   }
 }
 
