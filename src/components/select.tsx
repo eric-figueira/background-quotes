@@ -9,7 +9,7 @@ const Select = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>, // Ref será direcionado para o Trigger ou outro subcomponente
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Root> // Usamos a tipagem do SelectPrimitive.Root
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
->(({ children, ...props }, ref) => (
+>(({ children, ...props }, _) => (
   <SelectPrimitive.Root {...props}>
     {children}
   </SelectPrimitive.Root>
