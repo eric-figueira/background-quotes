@@ -3,8 +3,11 @@ import { Button } from "../../components/button";
 import { Slogan } from "./components/slogan";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export function LandingPage() {
+  const { t } = useTranslation()
+
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
 
@@ -41,7 +44,7 @@ export function LandingPage() {
                   </>
                 ) : (
                   <>
-                    <span>Start creating</span>
+                    <span>{t("indexStartCreatingButton")}</span>
                     <ArrowRight className="size-5" />
                   </>
                 )}
