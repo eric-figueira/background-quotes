@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
+import { useTranslation } from "react-i18next"
 
 const words = {
   "guides": "text-blue-700",
@@ -10,6 +11,8 @@ const words = {
 }
 
 export function Slogan() {
+  const { t } = useTranslation()
+
   const [index, setIndex] = useState<number>(0)
 
   useEffect(() => {
@@ -20,9 +23,16 @@ export function Slogan() {
     return () => clearInterval(interval);
   }, [])
 
+  function transform(s: string) {
+    const capital = s.slice(0, 1).toUpperCase() + s.slice(1, s.length).toLowerCase()
+    const key = `indexSlogan${capital}`
+
+    return key
+  }
+
   return (
     <div className="flex flex-col items-center px-4 text-center font-extrabold text-3xl sm:text-4xl lg:text-5xl lg:leading-[3.5rem] xl:text-[52px] xl:leading-[4rem]">
-      <span>Create the background that</span>
+      <span>{t("indexSloganInitial")}</span>
       <div className="flex gap-3">
         <div>
           <motion.div
@@ -48,10 +58,14 @@ export function Slogan() {
             }}
             style={{ position: "relative" }}
           >
-            <span className={Object.values(words)[index]}>{Object.keys(words)[index]}</span>
+            <span className={Object.values(words)[index]}>
+              {t(
+                transform(Object.keys(words)[index])
+              )}
+            </span>
           </motion.div>
         </div>
-        <span>you.</span>
+        <span>{t("indexSloganLast")}</span>
       </div>
     </div>
   )

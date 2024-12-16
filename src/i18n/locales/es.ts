@@ -1,7 +1,30 @@
 const esTranslations = {
   translations: {
-    indexStartCreatingButton: "Comienza a crear"
-  }
+    indexSloganInitial: "Crea el fondo que",
+    indexSloganGuides: "guía",
+    indexSloganMotivates: "motiva",
+    indexSloganInspires: "inspira",
+    indexSloganChallenges: "desafía",
+    indexSloganEmpowers: "empodera",
+    indexSloganLast: "a ti.",
+    indexSecondaryParagraph: "Selecciona los colores, el autor, el dispositivo y todo lo que necesites.",
+    indexButton: "Comienza a crear",
+    createHeaderText: "Crear",
+    createFooterText: "Creado por",
+    createFormOptional: "Opcional",
+    createFormQuoteTitle: "Cita",
+    createFormAuthorLabel: "Autor",
+    createFormMinLengthLabel: "Tamaño mínima",
+    createFormMaxLengthLabel: "Tamaño máxima",
+    createFormBackgroundTitle: "Fondo",
+    createFormBackgroundColorLabel: "Color de fondo",
+    createFormForegroundColorLabel: "Color del texto",
+    createFormShowAuthorLabel: "Mostrar el nombre del autor",
+    createFormCreateImageTitle: "Crear imagen",
+    createFormDeviceLabel: "Dispositivo",
+    createFormSubmitButton: "Crear imagen",
+    createResultsDownloadButton: "Descargar imagen",
+  },
 }
 
 export { esTranslations }

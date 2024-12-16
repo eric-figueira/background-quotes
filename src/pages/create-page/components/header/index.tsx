@@ -1,8 +1,11 @@
 import React from "react";
 import { cn } from "../../../../utils/cn";
 import { LanguageSelect } from "./language-select";
+import { useTranslation } from "react-i18next";
 
 export function Header({ className, ...props }: React.ComponentProps<'div'>) {
+  const { t } = useTranslation()
+
   return (
     <header {...props}
       className={cn(
@@ -10,7 +13,7 @@ export function Header({ className, ...props }: React.ComponentProps<'div'>) {
         className
       )}
     >
-      <h1 className="font-semibold text-gray-900 text-2xl">Create</h1>
+      <h1 className="font-semibold text-gray-900 text-2xl">{t("createHeaderText")}</h1>
       
       <LanguageSelect />
     </header>

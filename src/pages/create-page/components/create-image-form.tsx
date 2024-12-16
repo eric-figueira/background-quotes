@@ -14,6 +14,7 @@ import { Switch } from "../../../components/switch";
 import { devices } from "../../../data/devices";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslation } from "react-i18next";
 
 interface CreateImageFormProps {
   handleCreateImage: (data: CreateImageSchema) => void,
@@ -34,65 +35,35 @@ export type CreateImageSchema = z.infer<typeof createImageSchema>
 export function CreateImageForm({
   handleCreateImage
 }: CreateImageFormProps) {
-  const { register, handleSubmit, setValue, watch, control } = useForm({
+  const { t } = useTranslation()
+
+  const { register, handleSubmit, control } = useForm({
     resolver: zodResolver(createImageSchema)
   })
-
-  async function handleSearchAuthor() {
-    const author = watch("author")
-
-    const response = await fetch(`http://localhost:5000/search-author?author="${author}"`, {
-      method: "GET",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-    })
-    const json = await response.json()
-
-    const exists      = json["exists"]
-    const authorFound = json["author_found"]
-
-    if (exists) {
-      setValue("author", authorFound)
-    } else {
-      alert("ERROR validating author")
-    }
-  }
 
   return (
     <form onSubmit={handleSubmit(handleCreateImage)} className="space-y-4">
       <div className="rounded-md border border-slate-300 space-y-6 p-6">
         <div className="space-y-4">
-          <h2 className="font-semibold text-2xl">Quote</h2>
+          <h2 className="font-semibold text-2xl">{t("createFormQuoteTitle")}</h2>
 
           <div className="flex flex-col gap-4">  
             <div className="w-full flex flex-col gap-[6px]">
               <div className="flex justify-between">
-                <span className="font-medium text-sm">Author</span>
-                <span className="font-normal text-slate-400 text-sm">(optional)</span>
+                <span className="font-medium text-sm">{t("createFormAuthorLabel")}</span>
+                <span className="font-normal text-slate-400 text-sm">({t("createFormOptional")})</span>
               </div>
 
-              <div className="flex gap-2">
-                <Input  
-                  type="text" 
-                  placeholder="e.g. Sun Tzu" 
-                  {...register("author")} 
-                />
-                <Button 
-                  className="bg-slate-100 text-slate-950 hover:bg-slate-200 font-medium"
-                  onClick={handleSearchAuthor}
-                >
-                  Search
-                </Button>
-              </div>
-
-              <span className="font-regular text-sm text-slate-500">Search for any author</span>
+              <Input  
+                type="text" 
+                placeholder="e.g. Sun Tzu" 
+                {...register("author")} 
+              />
             </div>
 
             <div className="w-full flex items-center gap-4">
               <div className="w-full flex flex-col gap-[6px]">
-                <span className="font-medium text-sm">Min length</span>
+                <span className="font-medium text-sm">{t("createFormMinLengthLabel")}</span>
                 <Input 
                   type="number"
                   placeholder="e.g. 20" 
@@ -103,7 +74,7 @@ export function CreateImageForm({
               </div>
 
               <div className="w-full flex flex-col gap-[6px]">
-                <span className="font-medium text-sm">Max length</span>
+                <span className="font-medium text-sm">{t("createFormMaxLengthLabel")}</span>
                 <Input 
                   type="number" 
                   placeholder="e.g. 80" 
@@ -116,17 +87,15 @@ export function CreateImageForm({
           </div>
         </div>
 
-        <div className="w-full h-[1px] bg-slate-300" />
-
         <div className="space-y-4">
-          <h2 className="font-semibold text-2xl">Background</h2>
+          <h2 className="font-semibold text-2xl">{t("createFormBackgroundTitle")}</h2>
 
           <div className="flex flex-col gap-4">  
             <div className="w-full flex flex-col gap-[6px]">
               <div className="flex items-center gap-2">
                 <div className="w-1/2 flex flex-col gap-1">
-                  <label className="font-medium text-sm flex-1" htmlFor="backgroundColorPicker">Background Color</label>
-                  <span className="font-normal text-slate-400 text-sm">(optional)</span>
+                  <label className="font-medium text-sm flex-1" htmlFor="backgroundColorPicker">{t("createFormBackgroundColorLabel")}</label>
+                  <span className="font-normal text-slate-400 text-sm">({t("createFormOptional")})</span>
                 </div>
                 <div className="w-1/2">
                   <Input
@@ -142,8 +111,8 @@ export function CreateImageForm({
             <div className="w-full flex flex-col gap-[6px]">
               <div className="flex items-center gap-2">
                 <div className="w-1/2 flex flex-col gap-1">
-                  <label className="font-medium text-sm flex-1" htmlFor="foregroundColorPicker">Foreground Color</label>
-                  <span className="font-normal text-slate-400 text-sm">(optional)</span>
+                  <label className="font-medium text-sm flex-1" htmlFor="foregroundColorPicker">{t("createFormForegroundColorLabel")}</label>
+                  <span className="font-normal text-slate-400 text-sm">({t("createFormOptional")})</span>
                 </div>
                 <div className="w-1/2">
                   <Input 
@@ -157,7 +126,7 @@ export function CreateImageForm({
             </div>
 
             <div className="inline-flex justify-between gap-2 items-center">
-              <span className="font-medium text-sm">Show author's name on quote</span>
+              <span className="font-medium text-sm">{t("createFormShowAuthorLabel")}</span>
               <Controller 
                 name="showAuthor"
                 control={control}
@@ -175,13 +144,13 @@ export function CreateImageForm({
       </div>
 
       <div className="rounded-md border border-slate-300 space-y-4 p-6">
-        <h2 className="font-semibold text-2xl">Create image</h2>
+        <h2 className="font-semibold text-2xl">{t("createFormCreateImageTitle")}</h2>
 
         <div className="flex flex-col gap-4">
           <div className="w-full flex flex-col gap-[6px]">
             <div className="flex justify-between">
-              <span className="font-medium text-sm">Device</span>
-              <span className="font-normal text-slate-400 text-sm">(optional)</span>
+              <span className="font-medium text-sm">{t("createFormDeviceLabel")}</span>
+              <span className="font-normal text-slate-400 text-sm">({t("createFormOptional")})</span>
             </div>
 
             <Controller
@@ -218,7 +187,7 @@ export function CreateImageForm({
           </div>
 
           <Button className="w-full" type="submit">
-            Create image
+            {t("createFormSubmitButton")}
           </Button>
         </div>
       </div>
