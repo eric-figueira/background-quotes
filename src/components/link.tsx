@@ -8,7 +8,7 @@ const Link = React.forwardRef<HTMLAnchorElement, React.ComponentProps<'a'>>(
         href={href}
         ref={ref}
         className={cn(
-          "no-underline text-inherit",
+          "no-underline text-inherit h-fit w-fit",
           className
         )}
         target={target}

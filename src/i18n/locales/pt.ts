@@ -25,6 +25,7 @@ const ptTranslations = {
     createFormSubmitButton: "Criar imagem",
     createResultsTitle: "Resultado",
     createResultsNoImage: "Nenhuma imagem foi gerada.",
+    createResultsViewImageButton: "Visualizar imagem",
     createResultsDownloadButton: "Baixar imagem",
   },
 }

@@ -6,16 +6,17 @@ import { CreateImageForm, CreateImageSchema } from "./components/create-image-fo
 import { devices } from "../../data/devices";
 import { Link } from "../../components/link";
 import { Button } from "../../components/button";
-import { Download, ImageOff } from "lucide-react";
+import { Download, Fullscreen, ImageOff } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { ViewImageModal } from "./components/view-image-modal";
 
 
 export function CreatePage() {
   const { t } = useTranslation()
   const [image, setImage] = useState<string | undefined>()
+  const [isViewImageModalOpen, setIsViewImageModalOpen] = useState(false)
 
   async function handleCreateImage(data: CreateImageSchema) {
-    console.log(data)
 
     const minLength = Number(data.minLength)
     const maxLength = Number(data.maxLength)
@@ -31,7 +32,7 @@ export function CreatePage() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        "author": data.author,
+        "author": data.author === "" ? null : data.author,
         "min_length": minLength,
         "max_length": maxLength,
         "background_color": data.backgroundColor,
@@ -46,6 +47,8 @@ export function CreatePage() {
     const url = URL.createObjectURL(blob)
     setImage(url)
   }
+
+  function toggleViewImageModalOpen(v: boolean) { setIsViewImageModalOpen(v) }
 
   return (
     <main className="h-screen flex flex-col">
@@ -66,16 +69,28 @@ export function CreatePage() {
                   </div>
                 ) : (
                   <div className="flex gap-4">
-                    <img src={image} alt="Generated Image" />
+                    <img src={image} alt="Generated Image" className="max-h-[20rem]" />
 
-                    <Link href={image} download="generated.png">
-                      <Button className="gap-2">
+                    <div className="flex flex-col gap-2 w-fit">
+                      <Button 
+                        className="gap-2 bg-gray-200 hover:bg-gray-300 text-slate-900"
+                        onClick={() => toggleViewImageModalOpen(true)}
+                      >
                         <>
-                          <span>{t("createResultsDownloadButton")}</span>
-                          <Download className="size-5" />
+                          <Fullscreen className="size-5" />
+                          <span>{t("createResultsViewImageButton")}</span>
                         </>
                       </Button>
-                    </Link>
+
+                      <Link href={image} download="generated.png" className="w-full">
+                        <Button className="gap-2 w-full">
+                          <>
+                            <Download className="size-5" />
+                            <span>{t("createResultsDownloadButton")}</span>
+                          </>
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
                 )}
               </>
@@ -83,6 +98,14 @@ export function CreatePage() {
         </div>
       </div>
       <Footer />
+
+      {isViewImageModalOpen && (
+        <ViewImageModal 
+          imgUrl={image} 
+          toggleModal={toggleViewImageModalOpen}
+          className="scale-100 transition"
+        />
+      )}
     </main>
   )
 }

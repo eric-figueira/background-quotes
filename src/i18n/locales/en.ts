@@ -25,6 +25,7 @@ const enTranslations = {
     createFormSubmitButton: "Create image",
     createResultsTitle: "Result",
     createResultsNoImage: "No image was generated.",
+    createResultsViewImageButton: "View image",
     createResultsDownloadButton: "Download image",
   }
 }
