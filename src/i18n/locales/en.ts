@@ -11,7 +11,7 @@ const enTranslations = {
     indexButton: "Start creating",
     createHeaderText: "Create",
     createFooterText: "Built by",
-    createFormOptional: "Optional",
+    createFormOptional: "The fields above are optional.",
     createFormQuoteTitle: "Quote",
     createFormAuthorLabel: "Author",
     createFormMinLengthLabel: "Min length",

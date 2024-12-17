@@ -11,7 +11,7 @@ const frTranslations  = {
     indexButton: "Commencez à créer",
     createHeaderText: "Créer",
     createFooterText: "Conçu par",
-    createFormOptional: "Optionnel",
+    createFormOptional: "Les champs ci-dessus sont facultatifs.",
     createFormQuoteTitle: "Citation",
     createFormAuthorLabel: "Auteur",
     createFormMinLengthLabel: "Taille minimale",

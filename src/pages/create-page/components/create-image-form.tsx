@@ -15,6 +15,7 @@ import { devices } from "../../../data/devices";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
+import { Info } from "lucide-react";
 
 interface CreateImageFormProps {
   handleCreateImage: (data: CreateImageSchema) => void,
@@ -49,10 +50,7 @@ export function CreateImageForm({
 
           <div className="flex flex-col gap-4">  
             <div className="w-full flex flex-col gap-[6px]">
-              <div className="flex justify-between">
-                <span className="font-medium text-sm">{t("createFormAuthorLabel")}</span>
-                <span className="font-normal text-slate-400 text-sm">({t("createFormOptional")})</span>
-              </div>
+              <span className="font-medium text-sm">{t("createFormAuthorLabel")}</span>
 
               <Input  
                 type="text" 
@@ -84,48 +82,53 @@ export function CreateImageForm({
                 />
               </div>
             </div>
+
+            <div className="bg-slate-50 border border-slate-200 rounded-md text-slate-400 flex gap-2 items-center px-4 py-2">
+              <Info className="size-5" />
+              <p className="text-sm">{t("createFormOptional")}</p>
+            </div>
           </div>
         </div>
 
         <div className="space-y-4">
           <h2 className="font-semibold text-2xl">{t("createFormBackgroundTitle")}</h2>
 
-          <div className="flex flex-col gap-4">  
-            <div className="w-full flex flex-col gap-[6px]">
-              <div className="flex items-center gap-2">
-                <div className="w-1/2 flex flex-col gap-1">
-                  <label className="font-medium text-sm flex-1" htmlFor="backgroundColorPicker">{t("createFormBackgroundColorLabel")}</label>
-                  <span className="font-normal text-slate-400 text-sm">({t("createFormOptional")})</span>
+          <div className="space-y-4">
+            <div className="flex flex-col">  
+              <div className="w-full flex flex-col gap-[6px]">
+                <div className="flex items-center gap-2">
+                  <div className="w-1/2">
+                    <label className="font-medium text-sm flex-1" htmlFor="backgroundColorPicker">{t("createFormBackgroundColorLabel")}</label>
+                  </div>
+                  <div className="w-1/2">
+                    <Input
+                      type="color"
+                      className="w-full h-10 p-0 rounded-md border-none inset-0 appearance-none bg-transparent"
+                      id="backgroundColorPicker"
+                      {...register("backgroundColor")}
+                    />
+                  </div>
                 </div>
-                <div className="w-1/2">
-                  <Input
-                    type="color"
-                    className="w-full h-10 p-0 rounded-md border-none inset-0 appearance-none bg-transparent"
-                    id="backgroundColorPicker"
-                    {...register("backgroundColor")}
-                  />
+              </div>
+
+              <div className="w-full flex flex-col gap-[6px]">
+                <div className="flex items-center gap-2">
+                  <div className="w-1/2">
+                    <label className="font-medium text-sm flex-1" htmlFor="foregroundColorPicker">{t("createFormForegroundColorLabel")}</label>
+                  </div>
+                  <div className="w-1/2">
+                    <Input 
+                      type="color"
+                      className="w-full h-10 p-0 rounded-md border-none inset-0 appearance-none bg-transparent"
+                      id="foregroundColorPicker"
+                      {...register("foregroundColor")}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="w-full flex flex-col gap-[6px]">
-              <div className="flex items-center gap-2">
-                <div className="w-1/2 flex flex-col gap-1">
-                  <label className="font-medium text-sm flex-1" htmlFor="foregroundColorPicker">{t("createFormForegroundColorLabel")}</label>
-                  <span className="font-normal text-slate-400 text-sm">({t("createFormOptional")})</span>
-                </div>
-                <div className="w-1/2">
-                  <Input 
-                    type="color"
-                    className="w-full h-10 p-0 rounded-md border-none inset-0 appearance-none bg-transparent"
-                    id="foregroundColorPicker"
-                    {...register("foregroundColor")}
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="inline-flex justify-between gap-2 items-center">
+            <div className="w-full inline-flex justify-between gap-2 items-center">
               <span className="font-medium text-sm">{t("createFormShowAuthorLabel")}</span>
               <Controller 
                 name="showAuthor"
@@ -148,11 +151,8 @@ export function CreateImageForm({
 
         <div className="flex flex-col gap-4">
           <div className="w-full flex flex-col gap-[6px]">
-            <div className="flex justify-between">
-              <span className="font-medium text-sm">{t("createFormDeviceLabel")}</span>
-              <span className="font-normal text-slate-400 text-sm">({t("createFormOptional")})</span>
-            </div>
-
+            <span className="font-medium text-sm">{t("createFormDeviceLabel")}</span>
+            
             <Controller
               name="device"
               control={control}
