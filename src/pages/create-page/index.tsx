@@ -6,11 +6,13 @@ import { CreateImageForm, CreateImageSchema } from "./components/create-image-fo
 import { devices } from "../../data/devices";
 import { Link } from "../../components/link";
 import { Button } from "../../components/button";
-import { Download } from "lucide-react";
+import { Download, ImageOff } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 
 export function CreatePage() {
-  const [image, setImage] = useState('')
+  const { t } = useTranslation()
+  const [image, setImage] = useState<string | undefined>()
 
   async function handleCreateImage(data: CreateImageSchema) {
     console.log(data)
@@ -48,27 +50,35 @@ export function CreatePage() {
   return (
     <main className="h-screen flex flex-col">
       <Header />
-      <div className="flex gap-8 flex-grow p-8 md:p-10">
-        <div className="w-full sm:w-1/2 md:w-1/3">
+      <div className="flex flex-col md:flex-row gap-8 flex-grow p-8 md:p-10">
+        <div className="w-full sm:w-2/3 md:w-2/5 lg:w-1/3">
           <CreateImageForm handleCreateImage={handleCreateImage} />
         </div>
-        <div className="w-full flex-shrink">
+        <div className="flex-grow">
           <div className="rounded-md border border-slate-300 space-y-6 p-6">
-            <h2 className="font-semibold text-2xl w-fit">Resultado</h2>
+            <h2 className="font-semibold text-2xl w-fit">{t("createResultsTitle")}</h2>
             
-            <div className="flex gap-4">
-              <img src={image} alt="Generated Image" />
+              <>
+                {image === undefined ? (
+                  <div className="bg-slate-50 border border-slate-200 rounded-md text-slate-400 flex gap-4 items-center p-4">
+                    <ImageOff className="size-10" />
+                    <p className="font-medium">{t("createResultsNoImage")}</p>
+                  </div>
+                ) : (
+                  <div className="flex gap-4">
+                    <img src={image} alt="Generated Image" />
 
-              <Link href={image} download="generated.png">
-                <Button className="gap-2">
-                  <>
-                    <span>Download image</span>
-                    <Download className="size-5" />
-                  </>
-                </Button>
-              </Link>
-            </div>
-            
+                    <Link href={image} download="generated.png">
+                      <Button className="gap-2">
+                        <>
+                          <span>{t("createResultsDownloadButton")}</span>
+                          <Download className="size-5" />
+                        </>
+                      </Button>
+                    </Link>
+                  </div>
+                )}
+              </>
           </div>
         </div>
       </div>

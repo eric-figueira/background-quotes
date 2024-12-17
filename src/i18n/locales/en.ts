@@ -23,6 +23,8 @@ const enTranslations = {
     createFormCreateImageTitle: "Create Image",
     createFormDeviceLabel: "Device",
     createFormSubmitButton: "Create image",
+    createResultsTitle: "Result",
+    createResultsNoImage: "No image was generated.",
     createResultsDownloadButton: "Download image",
   }
 }

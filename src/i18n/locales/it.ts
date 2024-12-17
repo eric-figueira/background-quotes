@@ -23,6 +23,8 @@ const itTranslations = {
     createFormCreateImageTitle: "Crea immagine",
     createFormDeviceLabel: "Dispositivo",
     createFormSubmitButton: "Crea immagine",
+    createResultsTitle: "Risultato",
+    createResultsNoImage: "Nessuna immagine è stata generata.",
     createResultsDownloadButton: "Scarica immagine",
   },
 }

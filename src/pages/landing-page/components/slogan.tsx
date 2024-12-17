@@ -33,7 +33,7 @@ export function Slogan() {
   return (
     <div className="flex flex-col items-center px-4 text-center font-extrabold text-3xl sm:text-4xl lg:text-5xl lg:leading-[3.5rem] xl:text-[52px] xl:leading-[4rem]">
       <span>{t("indexSloganInitial")}</span>
-      <div className="flex gap-3">
+      <div className="flex gap-2">
         <div>
           <motion.div
             key={index}
