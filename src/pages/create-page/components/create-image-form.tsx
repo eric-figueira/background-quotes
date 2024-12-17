@@ -121,6 +121,7 @@ export function CreateImageForm({
                       type="color"
                       className="w-full h-10 p-0 rounded-md border-none inset-0 appearance-none bg-transparent"
                       id="foregroundColorPicker"
+                      defaultValue="#ffffff"
                       {...register("foregroundColor")}
                     />
                   </div>
