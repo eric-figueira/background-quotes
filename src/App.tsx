@@ -19,12 +19,17 @@ const router = createBrowserRouter([
   }
 ])
 
+const api = import.meta.env.VITE_CORE_URL
 
 export function App() {
   const { i18n } = useTranslation()
 
   useEffect(() => {
     i18n.changeLanguage(navigator.language)
+
+    fetch(`${api}/alive`, {
+      method: "GET"
+    })
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

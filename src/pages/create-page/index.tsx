@@ -10,9 +10,10 @@ import { Download, Fullscreen, ImageOff } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { ViewImageModal } from "./components/view-image-modal";
 
+const api = import.meta.env.VITE_CORE_URL
 
 export function CreatePage() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [image, setImage] = useState<string | undefined>()
   const [isViewImageModalOpen, setIsViewImageModalOpen] = useState(false)
 
@@ -25,7 +26,9 @@ export function CreatePage() {
     const width = device!.width
     const height = device!.height
 
-    const response = await fetch('http://localhost:5000/create', {
+    const language = i18n.language.slice(0, 2)
+
+    const response = await fetch(`${api}/create`, {
       method: "POST",
       headers: {
         'Accept': 'application/json',
@@ -39,13 +42,20 @@ export function CreatePage() {
         "foreground_color": data.foregroundColor,
         "show_author": data.showAuthor,
         "width": width,
-        "height": height
+        "height": height,
+        "language": language
       })
     })
 
-    const blob = await response.blob()
-    const url = URL.createObjectURL(blob)
-    setImage(url)
+    if (response.status === 200) {
+      const blob = await response.blob()
+      const url = URL.createObjectURL(blob)
+      setImage(url)
+    }
+    else {
+      const r = await response.json()
+      console.log(r)
+    } 
   }
 
   function toggleViewImageModalOpen(v: boolean) { setIsViewImageModalOpen(v) }
