@@ -15,10 +15,11 @@ import { devices } from "../../../data/devices";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
-import { Info } from "lucide-react";
+import { Info, Loader2 } from "lucide-react";
 
 interface CreateImageFormProps {
   handleCreateImage: (data: CreateImageSchema) => void,
+  isFetching: boolean,
 }
 
 const createImageSchema = z.object({
@@ -34,7 +35,8 @@ const createImageSchema = z.object({
 export type CreateImageSchema = z.infer<typeof createImageSchema>
 
 export function CreateImageForm({
-  handleCreateImage
+  handleCreateImage,
+  isFetching,
 }: CreateImageFormProps) {
   const { t } = useTranslation()
 
@@ -187,8 +189,20 @@ export function CreateImageForm({
             />
           </div>
 
-          <Button className="w-full" type="submit">
-            {t("createFormSubmitButton")}
+          <Button 
+            className="w-full" 
+            type="submit"
+            disabled={isFetching}
+          >
+            {isFetching ? (
+              <>
+                <Loader2 className="animate-spin size-5" />
+              </>
+            ) : (
+              <>
+                {t("createFormSubmitButton")}
+              </>
+            )}
           </Button>
         </div>
       </div>

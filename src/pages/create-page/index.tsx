@@ -14,8 +14,10 @@ const api = import.meta.env.VITE_CORE_URL
 
 export function CreatePage() {
   const { t, i18n } = useTranslation()
+
   const [image, setImage] = useState<string | undefined>()
   const [isViewImageModalOpen, setIsViewImageModalOpen] = useState(false)
+  const [isFetching, setIsFetching] = useState(false)
 
   async function handleCreateImage(data: CreateImageSchema) {
 
@@ -27,6 +29,8 @@ export function CreatePage() {
     const height = device!.height
 
     const language = i18n.language.slice(0, 2)
+
+    setIsFetching(true)
 
     const response = await fetch(`${api}/create`, {
       method: "POST",
@@ -47,6 +51,8 @@ export function CreatePage() {
       })
     })
 
+    setIsFetching(false)
+
     if (response.status === 200) {
       const blob = await response.blob()
       const url = URL.createObjectURL(blob)
@@ -65,44 +71,57 @@ export function CreatePage() {
       <Header />
       <div className="flex flex-col md:flex-row gap-8 flex-grow p-8 md:p-10">
         <div className="w-full sm:w-2/3 md:w-2/5 lg:w-1/3">
-          <CreateImageForm handleCreateImage={handleCreateImage} />
+          <CreateImageForm 
+            handleCreateImage={handleCreateImage} 
+            isFetching={isFetching}
+          />
         </div>
         <div className="flex-grow">
           <div className="rounded-md border border-slate-300 space-y-6 p-6">
             <h2 className="font-semibold text-2xl w-fit">{t("createResultsTitle")}</h2>
             
               <>
-                {image === undefined ? (
-                  <div className="bg-slate-50 border border-slate-200 rounded-md text-slate-400 flex gap-4 items-center p-4">
-                    <ImageOff className="size-10" />
-                    <p className="font-medium">{t("createResultsNoImage")}</p>
-                  </div>
-                ) : (
+                {isFetching ? (
                   <div className="flex gap-4">
-                    <img src={image} alt="Generated Image" className="max-h-[20rem]" />
-
-                    <div className="flex flex-col gap-2 w-fit">
-                      <Button 
-                        className="gap-2 bg-gray-200 hover:bg-gray-300 text-slate-900"
-                        onClick={() => toggleViewImageModalOpen(true)}
-                      >
-                        <>
-                          <Fullscreen className="size-5" />
-                          <span>{t("createResultsViewImageButton")}</span>
-                        </>
-                      </Button>
-
-                      <Link href={image} download="generated.png" className="w-full">
-                        <Button className="gap-2 w-full">
-                          <>
-                            <Download className="size-5" />
-                            <span>{t("createResultsDownloadButton")}</span>
-                          </>
-                        </Button>
-                      </Link>
+                    <div className="bg-slate-200 animate-pulse rounded-md w-64 h-fill" />
+                    <div className="flex flex-col gap-2">
+                      <div className="bg-slate-200 animate-pulse rounded-md h-8 w-32" />
+                      <div className="bg-slate-200 animate-pulse rounded-md h-8 w-32" />
                     </div>
                   </div>
-                )}
+                ) :
+                  image === undefined ? (
+                    <div className="bg-slate-50 border border-slate-200 rounded-md text-slate-400 flex gap-4 items-center p-4">
+                      <ImageOff className="size-10" />
+                      <p className="font-medium">{t("createResultsNoImage")}</p>
+                    </div>
+                  ) : (
+                    <div className="flex gap-4">
+                      <img src={image} alt="Generated Image" className="max-h-[20rem]" />
+
+                      <div className="flex flex-col gap-2 w-fit">
+                        <Button 
+                          className="gap-2 bg-gray-200 hover:bg-gray-300 text-slate-900"
+                          onClick={() => toggleViewImageModalOpen(true)}
+                        >
+                          <>
+                            <Fullscreen className="size-5" />
+                            <span>{t("createResultsViewImageButton")}</span>
+                          </>
+                        </Button>
+
+                        <Link href={image} download="generated.png" className="w-full">
+                          <Button className="gap-2 w-full">
+                            <>
+                              <Download className="size-5" />
+                              <span>{t("createResultsDownloadButton")}</span>
+                            </>
+                          </Button>
+                        </Link>
+                      </div>
+                    </div>
+                  )
+                }
               </>
           </div>
         </div>
