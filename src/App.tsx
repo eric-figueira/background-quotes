@@ -25,7 +25,10 @@ export function App() {
   const { i18n } = useTranslation()
 
   useEffect(() => {
-    i18n.changeLanguage(navigator.language)
+    const language = navigator.language
+    const formatted = language.slice(0, 2).toLowerCase()
+
+    i18n.changeLanguage(formatted)
 
     fetch(`${api}/alive`, {
       method: "GET"

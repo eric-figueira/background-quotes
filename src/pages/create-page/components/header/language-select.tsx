@@ -11,20 +11,19 @@ import { useTranslation } from "react-i18next";
 
 export function LanguageSelect() {
   const { i18n } = useTranslation()
-  const [language, setLanguage] = useState('pt')
+  const [language, setLanguage] = useState('en')
 
   useEffect(() => {
-    const browserLanguage = navigator.language
-    const loaded = browserLanguage.slice(0, 2).toLowerCase()
+    const loaded = i18n.language
 
     const found = languages.find(l => l.code === loaded)
-
     if (!found) {
       setLanguage('en')
       return
     }
 
     setLanguage(loaded)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   function handleChangeLanguage(l: string) {
