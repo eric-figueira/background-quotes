@@ -45,10 +45,15 @@ export function CreateImageForm({
   return (
     <form onSubmit={handleSubmit(handleCreateImage)} className="space-y-4">
       <div className="rounded-md border border-slate-300 space-y-6 p-6">
-        <div className="space-y-4">
+        <div className="space-y-3">
           <h2 className="font-semibold text-2xl">{t("createFormQuoteTitle")}</h2>
 
-          <div className="flex flex-col gap-4">  
+          <div className="flex flex-col gap-3">  
+            <div className="bg-slate-50 border border-slate-200 rounded-md text-slate-400 flex gap-2 items-center px-4 py-2">
+              <Info className="size-5" />
+              <p className="text-sm">{t("createFormOptional")}</p>
+            </div>
+
             <div className="w-full flex flex-col gap-[6px]">
               <span className="font-medium text-sm">{t("createFormAuthorLabel")}</span>
 
@@ -82,18 +87,13 @@ export function CreateImageForm({
                 />
               </div>
             </div>
-
-            <div className="bg-slate-50 border border-slate-200 rounded-md text-slate-400 flex gap-2 items-center px-4 py-2">
-              <Info className="size-5" />
-              <p className="text-sm">{t("createFormOptional")}</p>
-            </div>
           </div>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-3">
           <h2 className="font-semibold text-2xl">{t("createFormBackgroundTitle")}</h2>
 
-          <div className="space-y-4">
+          <div className="space-y-3">
             <div className="flex flex-col">  
               <div className="w-full flex flex-col gap-[6px]">
                 <div className="flex items-center gap-2">
