@@ -5,13 +5,13 @@ import {
   SelectValue,
   SelectContent,
   SelectItem
-} from "../../../../components/select";
-import { languages } from "../../../../i18n/languages";
+} from "./select";
+import { languages } from "../i18n/languages";
 import { useTranslation } from "react-i18next";
 
 export function LanguageSelect() {
   const { i18n } = useTranslation()
-  const [language, setLanguage] = useState('en')
+  const [language, setLanguage] = useState(i18n.language)
 
   useEffect(() => {
     const loaded = i18n.language
@@ -23,8 +23,7 @@ export function LanguageSelect() {
     }
 
     setLanguage(loaded)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [i18n.language])
 
   function handleChangeLanguage(l: string) {
     setLanguage(l)

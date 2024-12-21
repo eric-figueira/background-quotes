@@ -1,6 +1,6 @@
 import React from "react";
-import { cn } from "../../../../utils/cn";
-import { LanguageSelect } from "./language-select";
+import { cn } from "../../../utils/cn";
+import { LanguageSelect } from "../../../components/language-select";
 import { useTranslation } from "react-i18next";
 
 export function Header({ className, ...props }: React.ComponentProps<'div'>) {

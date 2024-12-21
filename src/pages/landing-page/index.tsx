@@ -4,7 +4,7 @@ import { Slogan } from "./components/slogan";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { LanguageSelect } from "../create-page/components/header/language-select";
+import { LanguageSelect } from "../../components/language-select";
 
 export function LandingPage() {
   const { t } = useTranslation()
