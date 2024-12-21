@@ -11,7 +11,7 @@ interface ViewImageModalProps {
 export function ViewImageModal({ imgUrl, toggleModal, className }: ViewImageModalProps) {
   return (
     <div 
-      className={cn("fixed inset-0 bg-black/60 flex items-center justify-center scale-0", className)}
+      className={cn("fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center scale-0", className)}
       onClick={() => toggleModal(false)}
     >
       <Button 
@@ -21,12 +21,14 @@ export function ViewImageModal({ imgUrl, toggleModal, className }: ViewImageModa
         <X className="size-5 text-black" />
       </Button>
 
-      <img 
-        src={imgUrl} 
-        alt="Generated Image" 
-        className="max-w-5xl animate-scale-in" 
-        onClick={(e) => e.stopPropagation()}
-      />
+      <div className="w-full p-10 flex justify-center">
+        <img 
+          src={imgUrl} 
+          alt="Generated Image" 
+          className="max-w-4xl max-h-[80vh] w-full h-auto animate-scale-in rounded-md object-contain" 
+          onClick={(e) => e.stopPropagation()}
+        />
+      </div>
     </div>
   )
 }

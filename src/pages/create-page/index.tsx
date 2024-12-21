@@ -69,8 +69,8 @@ export function CreatePage() {
   return (
     <main className="h-screen flex flex-col">
       <Header />
-      <div className="flex flex-col md:flex-row gap-8 flex-grow p-8 md:p-10">
-        <div className="w-full sm:w-2/3 md:w-2/5 lg:w-1/3">
+      <div className="flex flex-col md:flex-row gap-4 flex-grow p-8 md:p-10">
+        <div className="w-full sm:w-2/3 md:w-3/5 lg:w-1/3">
           <CreateImageForm 
             handleCreateImage={handleCreateImage} 
             isFetching={isFetching}
@@ -96,15 +96,15 @@ export function CreatePage() {
                       <p className="font-medium">{t("createResultsNoImage")}</p>
                     </div>
                   ) : (
-                    <div className="flex gap-4">
+                    <div className="flex flex-wrap gap-4">
                       <img 
                         src={image} 
                         alt="Generated Image" 
-                        className="max-h-[20rem] cursor-pointer hover:ring-2 hover:ring-offset-2 hover:ring-gray-300 rounded-md" 
+                        className="max-h-[16rem] lg:max-h-[20rem] cursor-pointer hover:ring-2 hover:ring-offset-2 hover:ring-gray-300 rounded-md" 
                         onClick={() => toggleViewImageModalOpen(true)}
                       />
 
-                      <div className="flex flex-col gap-2 w-fit">
+                      <div className="flex flex-col gap-2 w-full max-w-[12rem]">
                         <Button 
                           className="gap-2 bg-gray-200 hover:bg-gray-300 text-slate-900"
                           onClick={() => toggleViewImageModalOpen(true)}
