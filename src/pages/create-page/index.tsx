@@ -9,15 +9,31 @@ import { Button } from "../../components/button";
 import { Download, Fullscreen, ImageOff } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { ViewImageModal } from "./components/view-image-modal";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle
+} from "../../components/dialog";
 
 const api = import.meta.env.VITE_CORE_URL
+
+interface Error {
+  error: string,
+  details: string,
+  service?: string
+}
 
 export function CreatePage() {
   const { t, i18n } = useTranslation()
 
-  const [image, setImage] = useState<string | undefined>()
+  const [image, setImage] = useState<string>()
   const [isViewImageModalOpen, setIsViewImageModalOpen] = useState(false)
   const [isFetching, setIsFetching] = useState(false)
+  const [showError, setShowError] = useState(false)
+  const [error, setError] = useState<Error>()
 
   async function handleCreateImage(data: CreateImageSchema) {
 
@@ -59,8 +75,11 @@ export function CreatePage() {
       setImage(url)
     }
     else {
-      const r = await response.json()
-      console.log(r)
+      const e = await response.json()
+      console.log(e)
+
+      setError(e)
+      setShowError(true)
     } 
   }
 
@@ -140,6 +159,33 @@ export function CreatePage() {
           className="scale-100 transition"
         />
       )}
+
+      <Dialog open={showError} onOpenChange={() => setShowError(false)}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{error?.error}</DialogTitle>
+            <DialogDescription>
+              An error occured when trying to create the image requested.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-2">
+            <div className="space-y-[0.15rem]">
+              <span className="text-sm font-semibold">Error details</span>
+              <p className="text-sm text-slate-800">{error?.details}</p>
+            </div>
+
+            {error?.service !== undefined && (
+              <div className="space-y-[0.15rem]">
+                <span className="text-sm font-semibold">Service</span>
+                <p className="text-sm text-slate-800">{error?.service}</p>
+              </div>
+            )}
+          </div>
+          <DialogFooter>
+            <Button type="button" onClick={() => setShowError(false)}>Got it!</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </main>
   )
 }
