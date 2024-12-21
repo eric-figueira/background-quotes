@@ -97,7 +97,12 @@ export function CreatePage() {
                     </div>
                   ) : (
                     <div className="flex gap-4">
-                      <img src={image} alt="Generated Image" className="max-h-[20rem]" />
+                      <img 
+                        src={image} 
+                        alt="Generated Image" 
+                        className="max-h-[20rem] cursor-pointer hover:ring-2 hover:ring-offset-2 hover:ring-gray-300 rounded-md" 
+                        onClick={() => toggleViewImageModalOpen(true)}
+                      />
 
                       <div className="flex flex-col gap-2 w-fit">
                         <Button 
