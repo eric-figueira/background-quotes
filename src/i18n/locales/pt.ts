@@ -27,6 +27,10 @@ const ptTranslations = {
     createResultsNoImage: "Nenhuma imagem foi gerada.",
     createResultsViewImageButton: "Visualizar imagem",
     createResultsDownloadButton: "Baixar imagem",
+    createErrorDialogDescription: "Um erro ocorreu ao tentar criar a imagem solicitada.",
+    createErrorDialogDetailsLabel: "Detalhes do erro",
+    createErrorDialogServiceLabel: "Serviço",
+    createErrorDialogButton: "Entendi!"
   },
 }
 

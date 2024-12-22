@@ -27,6 +27,10 @@ const itTranslations = {
     createResultsNoImage: "Nessuna immagine è stata generata.",
     createResultsViewImageButton: "Visualizza immagine",
     createResultsDownloadButton: "Scarica immagine",
+    createErrorDialogDescription: "Si è verificato un errore durante il tentativo di creare l'immagine richiesta.",
+    createErrorDialogDetailsLabel: "Dettagli dell'errore",
+    createErrorDialogServiceLabel: "Servizio",
+    createErrorDialogButton: "Capito!"
   },
 }
 

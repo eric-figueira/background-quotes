@@ -35,6 +35,16 @@ export function CreatePage() {
   const [showError, setShowError] = useState(false)
   const [error, setError] = useState<Error>()
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function isErrorFormatted(data: any) {
+    return (
+      typeof data === "object" &&
+      typeof data.error === "string" &&
+      typeof data.details === "string" &&
+      (typeof data.service === "undefined" || typeof data.service === "string")
+    )
+  }
+
   async function handleCreateImage(data: CreateImageSchema) {
 
     const minLength = Number(data.minLength)
@@ -75,10 +85,26 @@ export function CreatePage() {
       setImage(url)
     }
     else {
-      const e = await response.json()
-      console.log(e)
+      let error: Error
 
-      setError(e)
+      try {
+        const e = await response.json()
+
+        if (isErrorFormatted(e)) { error = e }
+        else {
+          error = {
+            error: "Unkown Error",
+            details: "An unexpected error happenned. Try again later."
+          }
+        }
+      } catch { 
+        error = {
+          error: "Format Error",
+          details: "The error could not be processed."
+        }
+      }
+
+      setError(error)
       setShowError(true)
     } 
   }
@@ -165,24 +191,24 @@ export function CreatePage() {
           <DialogHeader>
             <DialogTitle>{error?.error}</DialogTitle>
             <DialogDescription>
-              An error occured when trying to create the image requested.
+              {t("createErrorDialogDescription")}
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-2">
             <div className="space-y-[0.15rem]">
-              <span className="text-sm font-semibold">Error details</span>
+              <span className="text-sm font-semibold">{t("createErrorDialogDetailsLabel")}</span>
               <p className="text-sm text-slate-800">{error?.details}</p>
             </div>
 
             {error?.service !== undefined && (
               <div className="space-y-[0.15rem]">
-                <span className="text-sm font-semibold">Service</span>
+                <span className="text-sm font-semibold">{t("createErrorDialogServiceLabel")}</span>
                 <p className="text-sm text-slate-800">{error?.service}</p>
               </div>
             )}
           </div>
           <DialogFooter>
-            <Button type="button" onClick={() => setShowError(false)}>Got it!</Button>
+            <Button type="button" onClick={() => setShowError(false)}>{t("createErrorDialogButton")}</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

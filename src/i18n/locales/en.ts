@@ -27,6 +27,10 @@ const enTranslations = {
     createResultsNoImage: "No image was generated.",
     createResultsViewImageButton: "View image",
     createResultsDownloadButton: "Download image",
+    createErrorDialogDescription: "An error occured when trying to create the image requested.",
+    createErrorDialogDetailsLabel: "Error details",
+    createErrorDialogServiceLabel: "Service",
+    createErrorDialogButton: "Got it!",
   }
 }
 
