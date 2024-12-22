@@ -1,50 +1,55 @@
-# React + TypeScript + Vite
+<h1 align="center" style="font-weight: bold;">🖼 Background Quotes</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<div align="center">
+  <img width="875" alt="Frame 5" src="https://github.com/user-attachments/assets/cce00d89-431c-41dc-a525-c59ca93b375c" />
+</div>
 
-Currently, two official plugins are available:
+<div align="center">
+  <img src="https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=fff&style=for-the-badge" alt="vite"/>
+  <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" alt="typescript"/>
+  <img src="https://img.shields.io/badge/React-61DAFB.svg?style=for-the-badge&logo=React&logoColor=black" alt="react"/>
+  <img src="https://img.shields.io/badge/Tailwind%20CSS-06B6D4.svg?style=for-the-badge&logo=Tailwind-CSS&logoColor=white" alt="tailwind"/>
+</div>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<br />
 
-## Expanding the ESLint configuration
+<p align="center">
+  <b>Create a background image for your device with a quote that guides, motivates, inspires, challenges and empowers you. You can search for an author, customize the background and text colors, and select the device you want the image to fit in.</b>
+</p>
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+<h3 id="technologies">💻 Technologies</h3>
 
-- Configure the top-level `parserOptions` property like this:
+- React
+- Tailwind
+- React-i18next
+- Framer Motion
+- Zod
+- React Hook Form
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+<h3 id="started">🚀 Getting started</h3>
+
+<p>Clone the repository</p>
+
+```bash
+git clone https://github.com/eric-figueira/background-quotes.git
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+<p>Go to the project's directory</p>
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+cd background-quotes
 ```
+
+<p>Install dependencies</p>
+
+```bash
+pnpm install
+```
+
+<p>Run the development server:</p>
+
+```bash
+pnpm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) with your browser to see the result.
