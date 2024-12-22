@@ -1,7 +1,7 @@
 <h1 align="center" style="font-weight: bold;">🖼 Background Quotes</h1>
 
 <div align="center">
-  <img width="875" alt="Frame 5" src="https://github.com/user-attachments/assets/cce00d89-431c-41dc-a525-c59ca93b375c" />
+  <img src="https://github.com/user-attachments/assets/4dddf1cb-e183-4f0d-bf38-df10f1fa35fe" alt="Banner"/>
 </div>
 
 <div align="center">
